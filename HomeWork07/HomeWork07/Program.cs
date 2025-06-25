@@ -31,7 +31,7 @@ bool xWin6 = c3 == "X" && c6 == "X" && c9 == "X";
 //1,5,9
 bool xWin7 = c1 == "X" && c5 == "X" && c9 == "X";
 //3,5,7
-bool xWin8 = c7 == "X" && c5 == "X" && c3 == "X";
+bool xWin8 = c3 == "X" && c5 == "X" && c7 == "X";
 
 
 //1,2,3
@@ -49,8 +49,15 @@ bool oWin6 = c3 == "O" && c6 == "O" && c9 == "O";
 //1,5,9
 bool oWin7 = c1 == "O" && c5 == "O" && c9 == "O";
 //3,5,7
-bool oWin8 = c7 == "O" && c5 == "O" && c3 == "O";
+bool oWin8 = c3 == "O" && c5 == "O" && c7 == "O";
 #endregion
+
+//Check if it is draw
+bool isDraw = !(xWin1 || xWin2 || xWin3 || xWin4 || xWin5 || xWin6 || xWin7 || xWin8) &&
+			  !(oWin1 || oWin2 || oWin3 || oWin4 || oWin5 || oWin6 || oWin7 || oWin8) &&
+			  (c1 == "X" || c1 == "O") && (c2 == "X" || c2 == "O") && (c3 == "X" || c3 == "O") &&
+			  (c4 == "X" || c4 == "O") && (c5 == "X" || c5 == "O") && (c6 == "X" || c6 == "O") &&
+			  (c7 == "X" || c7 == "O") && (c8 == "X" || c8 == "O") && (c9 == "X" || c9 == "O");
 
 //Initial table
 Console.WriteLine($"{c1} | {c2} | {c3}\n" +
@@ -110,38 +117,54 @@ while (!isGameOver)
 		}
 	}
 
-	//Updating the values ​​of winning combinations for the first player
-	#region
-	//1,2,3
-	xWin1 = c1 == "X" && c2 == "X" && c3 == "X";
-	//4,5,6
-	xWin2 = c4 == "X" && c5 == "X" && c6 == "X";
-	//7,8,9
-	xWin3 = c7 == "X" && c8 == "X" && c9 == "X";
-	//1,4,7
-	xWin4 = c1 == "X" && c4 == "X" && c7 == "X";
-	//2,5,8
-	xWin5 = c2 == "X" && c5 == "X" && c8 == "X";
-	//3,6,9
-	xWin6 = c3 == "X" && c6 == "X" && c9 == "X";
-	//1,5,9
-	xWin7 = c1 == "X" && c5 == "X" && c9 == "X";
-	//3,5,7
-	xWin8 = c7 == "X" && c5 == "X" && c3 == "X";
-	#endregion
-
-	//Print updated table
-	Console.WriteLine($"{c1} | {c2} | {c3}\n" +
-					  $"----------\n" +
-					  $"{c4} | {c5} | {c6}\n" +
-					  $"----------\n" +
-					  $"{c7} | {c8} | {c9}\n");
-
-	//Check if first player won
-	if (xWin1 || xWin2 || xWin3 || xWin4 || xWin5 || xWin6 || xWin7 || xWin8)
+	if (isEndX)
 	{
-		Console.WriteLine("Player 1 win");
-		isGameOver = true;
+		//Updating the values ​​of winning combinations
+		#region
+		xWin1 = c1 == "X" && c2 == "X" && c3 == "X";
+		xWin2 = c4 == "X" && c5 == "X" && c6 == "X";
+		xWin3 = c7 == "X" && c8 == "X" && c9 == "X";
+		xWin4 = c1 == "X" && c4 == "X" && c7 == "X";
+		xWin5 = c2 == "X" && c5 == "X" && c8 == "X";
+		xWin6 = c3 == "X" && c6 == "X" && c9 == "X";
+		xWin7 = c1 == "X" && c5 == "X" && c9 == "X";
+		xWin8 = c3 == "X" && c5 == "X" && c7 == "X";
+
+		oWin1 = c1 == "O" && c2 == "O" && c3 == "O";
+		oWin2 = c4 == "O" && c5 == "O" && c6 == "O";
+		oWin3 = c7 == "O" && c8 == "O" && c9 == "O";
+		oWin4 = c1 == "O" && c4 == "O" && c7 == "O";
+		oWin5 = c2 == "O" && c5 == "O" && c8 == "O";
+		oWin6 = c3 == "O" && c6 == "O" && c9 == "O";
+		oWin7 = c1 == "O" && c5 == "O" && c9 == "O";
+		oWin8 = c3 == "O" && c5 == "O" && c7 == "O";
+
+		isDraw = !(xWin1 || xWin2 || xWin3 || xWin4 || xWin5 || xWin6 || xWin7 || xWin8) &&
+		 !(oWin1 || oWin2 || oWin3 || oWin4 || oWin5 || oWin6 || oWin7 || oWin8) &&
+		 (c1 == "X" || c1 == "O") && (c2 == "X" || c2 == "O") && (c3 == "X" || c3 == "O") &&
+		 (c4 == "X" || c4 == "O") && (c5 == "X" || c5 == "O") && (c6 == "X" || c6 == "O") &&
+		 (c7 == "X" || c7 == "O") && (c8 == "X" || c8 == "O") && (c9 == "X" || c9 == "O");
+
+		#endregion
+
+		//Print updated table
+		Console.WriteLine($"{c1} | {c2} | {c3}\n" +
+						  $"----------\n" +
+						  $"{c4} | {c5} | {c6}\n" +
+						  $"----------\n" +
+						  $"{c7} | {c8} | {c9}\n");
+
+		//Check if first player won
+		if (xWin1 || xWin2 || xWin3 || xWin4 || xWin5 || xWin6 || xWin7 || xWin8)
+		{
+			Console.WriteLine("Player 1 win");
+			isGameOver = true;
+		}
+		else if (isDraw)
+		{
+			Console.WriteLine("It`s draw");
+			isGameOver = true;
+		}
 	}
 
 	isEndX = false;
@@ -190,55 +213,50 @@ while (!isGameOver)
 				isEndO = true;
 				break;
 			default:
-				Console.WriteLine("All cells are filled");
-				isEndO = true;
+				Console.WriteLine("Invalid input or cell is filled. Please try again.");
 				break;
 		}
 	}
 
-	//Updating the values ​​of winning combinations for the second player
-	#region
-	//1,2,3
-	oWin1 = c1 == "O" && c2 == "O" && c3 == "O";
-	//4,5,6
-	oWin2 = c4 == "O" && c5 == "O" && c6 == "O";
-	//7,8,9
-	oWin3 = c7 == "O" && c8 == "O" && c9 == "O";
-	//1,4,7
-	oWin4 = c1 == "O" && c4 == "O" && c7 == "O";
-	//2,5,8
-	oWin5 = c2 == "O" && c5 == "O" && c8 == "O";
-	//3,6,9
-	oWin6 = c3 == "O" && c6 == "O" && c9 == "O";
-	//1,5,9
-	oWin7 = c1 == "O" && c5 == "O" && c9 == "O";
-	//3,5,7
-	oWin8 = c7 == "O" && c5 == "O" && c3 == "O";
-	#endregion
-
-	//Print updated table
-	Console.WriteLine($"{c1} | {c2} | {c3}\n" +
-					  $"----------\n" +
-					  $"{c4} | {c5} | {c6}\n" +
-					  $"----------\n" +
-					  $"{c7} | {c8} | {c9}\n");
-
-	//Check if second player won
-	if (oWin1 || oWin2 || oWin3 || oWin4 || oWin5 || oWin6 || oWin7 || oWin8)
+	if (isEndO)
 	{
-		Console.WriteLine("Player 2 win");
-		isGameOver = true;
-	}
+		//Updating the values ​​of winning combinations
+		#region
+		oWin1 = c1 == "O" && c2 == "O" && c3 == "O";
+		oWin2 = c4 == "O" && c5 == "O" && c6 == "O";
+		oWin3 = c7 == "O" && c8 == "O" && c9 == "O";
+		oWin4 = c1 == "O" && c4 == "O" && c7 == "O";
+		oWin5 = c2 == "O" && c5 == "O" && c8 == "O";
+		oWin6 = c3 == "O" && c6 == "O" && c9 == "O";
+		oWin7 = c1 == "O" && c5 == "O" && c9 == "O";
+		oWin8 = c3 == "O" && c5 == "O" && c7 == "O";
 
-	//Check if it's draw
-	if (!xWin1 && !xWin2 && !xWin3 && !xWin4 && !xWin5 && !xWin6 && !xWin7 && !xWin8
-		&& !oWin1 && !oWin2 && !oWin3 && !oWin4 && !oWin5 && !oWin6 && !oWin7 && !oWin8
-		&& c1 != "1" && c2 != "2" && c3 != "3"
-		&& c4 != "4" && c5 != "5" && c6 != "6"
-		&& c7 != "7" && c8 != "8" && c9 != "9")
-	{
-		Console.WriteLine("It`s draw!");
-		isGameOver = true;
+		isDraw = !(xWin1 || xWin2 || xWin3 || xWin4 || xWin5 || xWin6 || xWin7 || xWin8) &&
+		 !(oWin1 || oWin2 || oWin3 || oWin4 || oWin5 || oWin6 || oWin7 || oWin8) &&
+		 (c1 == "X" || c1 == "O") && (c2 == "X" || c2 == "O") && (c3 == "X" || c3 == "O") &&
+		 (c4 == "X" || c4 == "O") && (c5 == "X" || c5 == "O") && (c6 == "X" || c6 == "O") &&
+		 (c7 == "X" || c7 == "O") && (c8 == "X" || c8 == "O") && (c9 == "X" || c9 == "O");
+
+		#endregion
+
+		//Print updated table
+		Console.WriteLine($"{c1} | {c2} | {c3}\n" +
+						  $"----------\n" +
+						  $"{c4} | {c5} | {c6}\n" +
+						  $"----------\n" +
+						  $"{c7} | {c8} | {c9}\n");
+
+		//Check if second player won
+		if (oWin1 || oWin2 || oWin3 || oWin4 || oWin5 || oWin6 || oWin7 || oWin8)
+		{
+			Console.WriteLine("Player 2 wins");
+			isGameOver = true;
+		}
+		else if (isDraw)
+		{
+			Console.WriteLine("It`s draw!");
+			isGameOver = true;
+		}
 	}
 
 	isEndO = false;
